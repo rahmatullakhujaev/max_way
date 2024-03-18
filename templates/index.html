@@ -428,8 +428,14 @@
     });
     function getCookie(){
         var cookieValue = document.cookie.split("=");
-        if (cookieValue){
-            return JSON.parse(decodeURIComponent (cookieValue[2]))
+        const cookies = document.cookie.split('; ');
+        const cookieJson = {};
+        cookies.forEach(cookie => {
+            const [key, value] = cookie.split('=');
+        cookieJson[key] = decodeURIComponent(value);
+        });
+        if (cookieJson["cart"]){
+            return JSON.parse(decodeURIComponent (cookieJson["cart"]))
         }
         else{
             return [];
